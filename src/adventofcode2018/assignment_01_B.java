@@ -72,13 +72,12 @@ public class assignment_01_B {
         
         while (true) {
             runningTotal += list.get(index);
-            if (set.contains(runningTotal)) {
+            if (!set.add(runningTotal)) {
                 System.out.println("first double frequency: " + runningTotal);
                 System.out.println("nr of loops: " + nrOfLoops);
                 break;
             }
             else {
-                set.add(runningTotal);
                 index++;
                 if (index == list.size()) {
                     nrOfLoops++;

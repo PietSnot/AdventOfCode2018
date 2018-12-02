@@ -9,11 +9,13 @@ package adventofcode2018;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -67,18 +69,16 @@ public class assignment_02_B {
             return;
         }
         
-        int stringSize = list.get(0).length();
-        int[] a = {0};
-        for (a[0] = 0; a[0] < stringSize; a[0]++) {
+        
+        IntStream.range(0, list.get(0).length()).forEach(i -> {
             var temp = list.stream()
-                .map(s -> removeChar(s, a[0]))
-                .collect(groupingBy(s -> s, counting()))
+                .collect(groupingBy(s -> removeChar(s, i), counting()))
                 .entrySet().stream()
                 .filter(entry -> entry.getValue() == 2)
                 .collect(toList())
             ;
             if (!temp.isEmpty()) System.out.println(temp);
-        }      
+        });     
     }
     
     private static String removeChar(String s, int pos) {

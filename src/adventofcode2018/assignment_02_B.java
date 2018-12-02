@@ -9,14 +9,11 @@ package adventofcode2018;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  *
@@ -59,6 +56,7 @@ import java.util.stream.Stream;
 public class assignment_02_B {
     
     public static void main(String... args) {
+        
         List<String> list;
         try {
             var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "assignment_02_A.txt");
@@ -68,7 +66,6 @@ public class assignment_02_B {
             System.out.println("error reading input file....");
             return;
         }
-        
         
         IntStream.range(0, list.get(0).length()).forEach(i -> {
             var temp = list.stream()

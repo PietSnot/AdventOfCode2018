@@ -50,7 +50,7 @@ import java.util.stream.IntStream;
 public class assignment_01_B {
     public static void main(String... args) {
         
-        var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "assignment_01_A.txt");
+        var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "input_assignment_01_A.txt");
         List<Integer> list;
         
         try {

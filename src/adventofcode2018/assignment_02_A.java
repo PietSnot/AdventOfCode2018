@@ -76,7 +76,7 @@ public class assignment_02_A {
     
     public static void main(String... args) {
         try {
-            var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "assignment_02_A.txt");
+            var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "input_assignment_02_A.txt");
             var frequencies = Files
                 .lines(path)
                 .flatMap(assignment_02_A::frequencySet)

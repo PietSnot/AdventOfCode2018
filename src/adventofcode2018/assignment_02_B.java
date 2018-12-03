@@ -59,7 +59,7 @@ public class assignment_02_B {
         
         List<String> list;
         try {
-            var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "assignment_02_A.txt");
+            var path = Paths.get("D:/JavaProgs/AdventOfCode2018/src/adventofcode2018/Resources", "input_assignment_02_A.txt");
             list = Files.readAllLines(path);
         }
         catch (IOException e) {

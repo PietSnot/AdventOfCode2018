@@ -45,8 +45,7 @@ public class assignment_04_combined {
         var minutesAsleep = entry.getValue().stream()
             .collect(groupingBy(i -> i, counting()))
         ;
-        Comparator<Map.Entry<Integer, Long>> comparator2 = Comparator.comparingLong(e -> e.getValue());
-        var max = minutesAsleep.entrySet().stream().max(comparator2).get();
+        var max = minutesAsleep.entrySet().stream().max(Map.Entry.comparingByValue()).get();
         
         var result_A = entry.getKey() * max.getKey();
         System.out.println("result A = " + result_A);
@@ -67,14 +66,15 @@ public class assignment_04_combined {
         ;
         Comparator<Map.Entry<Integer,Long>> byValue = Map.Entry.comparingByValue();
         var mapPartB2 = mapPartB1.entrySet().stream()
-            .collect(toMap(e -> e.getKey(), 
-                           e -> e.getValue().entrySet().stream().max(byValue).get()
-                           )
+            .collect(toMap( e -> e.getKey(), 
+                            e -> e.getValue().entrySet().stream().max(byValue).get()
+                          )
              )
         ;
         Comparator<Map.Entry<Integer, Map.Entry<Integer, Long>>> flup =
             Comparator.comparing(e -> e.getValue().getValue())
         ;
+        
         var resultB = mapPartB2.entrySet().stream().max(flup).get();
         var minute = resultB.getKey();
         var guard = resultB.getValue().getKey();

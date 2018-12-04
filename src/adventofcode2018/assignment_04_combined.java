@@ -135,6 +135,7 @@ public class assignment_04_combined {
         var startminute = from.getMinute();
         return IntStream
             .range(startminute, startminute + (int) duration.toMinutes())
+            .map(i -> i % 60)
             .boxed()
             .collect(toList())
         ;

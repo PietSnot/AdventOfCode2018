@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
@@ -132,12 +133,11 @@ public class assignment_04_combined {
     public static List<Integer> MinutesAsleep(LocalDateTime from, LocalDateTime to) {
         var duration = Duration.between(from, to);
         var startminute = from.getMinute();
-        var list = IntStream
+        return IntStream
             .range(startminute, startminute + (int) duration.toMinutes())
             .boxed()
             .collect(toList())
         ;
-        return list;
     }
 }
 
@@ -157,6 +157,14 @@ class Pair<K, V> {
         if (!(o instanceof Pair)) return false;
         Pair p = (Pair) o;
         return k.equals(p.k) && v.equals(p.v);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.k);
+        hash = 37 * hash + Objects.hashCode(this.v);
+        return hash;
     }
     
     @Override

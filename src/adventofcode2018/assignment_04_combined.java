@@ -13,21 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 import java.util.stream.IntStream;
@@ -36,7 +29,7 @@ import java.util.stream.IntStream;
  *
  * @author Piet
  */
-public class assignment_04_A {
+public class assignment_04_combined {
     
     private static final Map<Integer, List<Integer>> guards = new HashMap<>();
     // key: id of the guard
@@ -93,7 +86,7 @@ public class assignment_04_A {
     }
     
     private static void createGuardsMap() {
-        URL url = assignment_04_A.class.getResource("Resources/input_assignment_04_A.txt");
+        URL url = assignment_04_combined.class.getResource("Resources/input_assignment_04_A.txt");
         try {
             Path path = Paths.get(url.toURI());
             List<String> inputs = Files.lines(path)

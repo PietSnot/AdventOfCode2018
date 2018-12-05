@@ -59,6 +59,7 @@ public class assignment_04_combined {
         // part B
         //*********************************************************************
         
+        // creating Map<minute, Map<guard, frequency>>
         var mapPartB1 = guards.entrySet().stream()
             .flatMap(e -> e.getValue().stream().map(integer -> new Pair<>(integer, e.getKey())))
             .collect(groupingBy(pair -> pair.k,
@@ -66,14 +67,18 @@ public class assignment_04_combined {
              )
         ;
         
-        var mapPartB2 = mapPartB1.entrySet().stream()
+        // creating List<minute, Map.Entry<guard, frequency>>
+        List<Pair<Integer, Map.Entry<Integer, Long>>> mapPartB2 = mapPartB1.entrySet().stream()
             .flatMap(e -> e.getValue().entrySet().stream().map(f -> new Pair<>(e.getKey(), f)))
             .collect(toList())
         ;
         
+        // creating a Comparator to find the max from above List
         Comparator<Pair<Integer, Map.Entry<Integer, Long>>> comparatorB = 
             Comparator.comparingLong(pair -> pair.v.getValue());
         
+        
+        // and here we go
         var resultB = mapPartB2.stream().max(comparatorB).get();
         
         int minute = resultB.k;

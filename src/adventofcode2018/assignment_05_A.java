@@ -8,15 +8,9 @@ package adventofcode2018;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import static java.util.stream.Collectors.toList;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  *
@@ -26,6 +20,7 @@ public class assignment_05_A {
     private static String input;
     
     public static void main(String... args) {
+        long startTime = System.currentTimeMillis();
         processInput();
         System.out.format("length of input: %,d %n", input.length());
         var sb = new StringBuilder();
@@ -37,6 +32,8 @@ public class assignment_05_A {
             .getAsInt()
          ;   
          System.out.format("Solution B = %,d %n", solutionB);
+         long endTime = System.currentTimeMillis();
+         System.out.format("took: %,f seconds %n", (endTime - startTime) / 1000.0);
     }
     
     private static void processInput() {

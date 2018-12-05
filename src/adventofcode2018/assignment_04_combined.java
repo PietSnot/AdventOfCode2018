@@ -68,7 +68,7 @@ public class assignment_04_combined {
         ;
         
         // creating List<minute, Map.Entry<guard, frequency>>
-        List<Pair<Integer, Map.Entry<Integer, Long>>> mapPartB2 = mapPartB1.entrySet().stream()
+        var mapPartB2 = mapPartB1.entrySet().stream()
             .flatMap(e -> e.getValue().entrySet().stream().map(f -> new Pair<>(e.getKey(), f)))
             .collect(toList())
         ;
@@ -78,7 +78,7 @@ public class assignment_04_combined {
             Comparator.comparingLong(pair -> pair.v.getValue());
         
         
-        // and here we go
+        // and here we go, result is of type Pair<Integer, Map.Entry<Integer, Long>>
         var resultB = mapPartB2.stream().max(comparatorB).get();
         
         int minute = resultB.k;

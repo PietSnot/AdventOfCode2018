@@ -38,6 +38,10 @@ public class assignment_04_combined {
     
     public static void main(String... args) {
         createGuardsMap();
+        
+        //*********************************************************************
+        // part A
+        //*********************************************************************
         Comparator<Map.Entry<Integer, List<Integer>>> comparator = Comparator.comparing(e -> e.getValue().size());
         var entry = guards.entrySet().stream()
             .max(comparator)
@@ -48,16 +52,12 @@ public class assignment_04_combined {
         ;
         var max = minutesAsleep.entrySet().stream().max(Map.Entry.comparingByValue()).get();
         
-        var result_A = entry.getKey() * max.getKey();
-        System.out.println("result A = " + result_A);
+        var resultA = entry.getKey() * max.getKey();
+        System.out.format("solution part A = %,d %n", resultA);
         
         //*********************************************************************
         // part B
         //*********************************************************************
-        
-        // to produce: a Map<Integer, Map<Guard, Integer>> with 
-        // key = minute
-        // value = map of guard and the frequency of that minute
         
         var mapPartB1 = guards.entrySet().stream()
             .flatMap(e -> e.getValue().stream().map(integer -> new Pair<>(integer, e.getKey())))
@@ -65,32 +65,28 @@ public class assignment_04_combined {
                                 groupingBy(pair -> pair.v, counting()))
              )
         ;
-        Comparator<Map.Entry<Integer,Long>> byValue = Map.Entry.comparingByValue();
+        
         var mapPartB2 = mapPartB1.entrySet().stream()
-            .collect(toMap( e -> e.getKey(), 
-                            e -> e.getValue().entrySet().stream().max(byValue).get()
-                          )
-             )
-        ;
-        Comparator<Map.Entry<Integer, Map.Entry<Integer, Long>>> flup =
-            Comparator.comparing(e -> e.getValue().getValue())
+            .flatMap(e -> e.getValue().entrySet().stream().map(f -> new Pair<>(e.getKey(), f)))
+            .collect(toList())
         ;
         
-        var resultB = mapPartB2.entrySet().stream().max(flup).get();
-        var minute = resultB.getKey();
-        var guard = resultB.getValue().getKey();
-        var freq = resultB.getValue().getValue();
-        System.out.format("minute: %d , guard: %d, frequency of minute: %d %n", 
-                          minute, guard, freq
-        );
-        System.out.format("result = %d * %d = %d %n", minute, guard, minute * guard);
+        Comparator<Pair<Integer, Map.Entry<Integer, Long>>> comparatorB = 
+            Comparator.comparingLong(pair -> pair.v.getValue());
+        
+        var resultB = mapPartB2.stream().max(comparatorB).get();
+        
+        int minute = resultB.k;
+        long guard = resultB.v.getKey();
+        System.out.format("solution part B = %,d * %,d = %,d %n", minute, guard, minute * guard);
     }
     
+    //----------------------------------------------
     private static void createGuardsMap() {
-        URL url = assignment_04_combined.class.getResource("Resources/input_assignment_04_A.txt");
+        var url = assignment_04_combined.class.getResource("Resources/input_assignment_04_A.txt");
         try {
-            Path path = Paths.get(url.toURI());
-            List<String> inputs = Files.lines(path)
+            var path = Paths.get(url.toURI());
+            var inputs = Files.lines(path)
                 .sorted()
                 .map(s -> s.replaceAll("[\\[\\]\\-:#]", " "))
                 .collect(toList())
@@ -102,10 +98,11 @@ public class assignment_04_combined {
         }
     }
     
+    //----------------------------------------------
     private static void processInputrecords(List<String> list) {
         var id = 0;
         LocalDateTime from = null, to = null;
-        for (String s: list) {
+        for (var s: list) {
             var strings = s.trim().split("\\s+");
             if (strings[5].equals("Guard")) {
                 id = Integer.parseInt(strings[6]);
@@ -121,6 +118,7 @@ public class assignment_04_combined {
         }
     }
     
+    //----------------------------------------------
     private static LocalDateTime getLocalDateTime(String[] s) {
         int j = Integer.parseInt(s[0]);
         int m = Integer.parseInt(s[1]);
@@ -130,6 +128,7 @@ public class assignment_04_combined {
         return LocalDateTime.of(j, m, d, h, min);
     }
     
+    //----------------------------------------------
     public static List<Integer> MinutesAsleep(LocalDateTime from, LocalDateTime to) {
         var duration = Duration.between(from, to);
         var startminute = from.getMinute();
@@ -142,6 +141,9 @@ public class assignment_04_combined {
     }
 }
 
+//****************************************************************************
+// class Pair
+//****************************************************************************
 class Pair<K, V> {
     final K k;
     final V v;

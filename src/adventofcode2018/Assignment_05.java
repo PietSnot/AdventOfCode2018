@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
  *
  * @author Piet
  */
-public class assignment_05_A {
+public class Assignment_05 {
     private static String input;
     
     public static void main(String... args) {
@@ -37,7 +37,7 @@ public class assignment_05_A {
     }
     
     private static void processInput() {
-        var url = assignment_05_A.class.getResource("Resources/input_assignment_05_A.txt");
+        var url = Assignment_05.class.getResource("Resources/input_assignment_05_A.txt");
         try {
             var path = Paths.get(url.toURI());
             var strings = Files.readAllLines(path);

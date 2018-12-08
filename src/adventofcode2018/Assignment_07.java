@@ -30,8 +30,9 @@ public class Assignment_07 {
     static Map<Character, List<Character>> input;
     static List<Worker> workers = new ArrayList<>();
     static long nrOfTasksToPerform;
-    static int nrOfWorkers = 2;
-    static boolean test = true;
+    static int nrOfWorkers = 5;
+    static boolean test = false;
+    static boolean print = false;
     
     
     public static void main(String... args) {
@@ -78,7 +79,9 @@ public class Assignment_07 {
                 toBeProcessed.addAll(temp);
             }
         }
-        var resultA = processed.stream().collect(StringBuilder::new, StringBuilder::append, StringBuilder::append).toString();
+        StringBuilder sb = new StringBuilder();
+        processed.forEach(sb::append);
+        var resultA = sb.toString();
         System.out.println(resultA);
     }
     
@@ -107,7 +110,7 @@ public class Assignment_07 {
                     if (w.newTask(c, time)) toBeProcessed.remove(c);
                 }
             }
-            if (test) makePrintOut(time, processed, tasksAvailable);
+            if (print) makePrintOut(time, processed, tasksAvailable);
         }
         var solutionB = time - 1;
         System.out.println("solution B: " + solutionB);
@@ -141,42 +144,10 @@ public class Assignment_07 {
     }
     
     private static void makePrintOut(int time, List<Character> processed, List<Character> available) {
-        String format = "%5d   ";
-        for (int i = 0; i < nrOfWorkers; i++) format += "%5s";
-        format += "%15s    %s%n";
-        
-        switch (nrOfWorkers) {
-            case 1: System.out.format(format, time, 
-                     workers.get(0).busyWithTask,
-                     available, processed);
-                     break;
-            case 2: System.out.format(format, time, 
-                     workers.get(0).busyWithTask,
-                     workers.get(1).busyWithTask,
-                     available, processed);
-                     break;
-            case 3: System.out.format(format, time, 
-                     workers.get(0).busyWithTask,
-                     workers.get(1).busyWithTask,
-                     workers.get(2).busyWithTask,
-                     available, processed);
-                     break;
-            case 4: System.out.format(format, time, 
-                     workers.get(0).busyWithTask,
-                     workers.get(1).busyWithTask,
-                     workers.get(2).busyWithTask,
-                     workers.get(3).busyWithTask,
-                     available, processed);
-                     break;
-            case 5: System.out.format(format, time, 
-                     workers.get(0).busyWithTask,
-                     workers.get(1).busyWithTask,
-                     workers.get(2).busyWithTask,
-                     workers.get(3).busyWithTask,
-                     workers.get(4).busyWithTask,
-                     available, processed);
-                     break;
-        }
+        System.out.format("%,5d   ", time);
+        workers.forEach(w -> System.out.format("%4s   ", w.busyWithTask));
+        System.out.format("%15s", available);
+        System.out.format("   %s %n", processed);
     }
 }
 

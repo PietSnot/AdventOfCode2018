@@ -107,11 +107,7 @@ public class Assignment_13 {
                 if (car.isCrashed) continue;
                 car.nextPosition();
                 Optional<Car> crashCar = findCrash(car);
-//                crashCar.ifPresent(c -> {c.isCrashed = true; car.isCrashed = true;});
-                if (crashCar.isPresent()) {
-                    crashCar.get().isCrashed = true;
-                    car.isCrashed = true;
-                }
+                crashCar.ifPresent(c -> {c.isCrashed = true; car.isCrashed = true;});
             }
             cars.removeIf(c -> c.isCrashed);
         }

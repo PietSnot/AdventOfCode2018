@@ -75,7 +75,7 @@ public class Assignment_12 {
 //            System.out.format("generation %,2d%n", generation);
             String s = makeString(newState);
 //            System.out.println(s);
-            if (generation >= 100) {
+            if (generation >= 1) {
                 solutionA.put(generation, s);
 //                System.out.println(generation + ":" + newState);
             }

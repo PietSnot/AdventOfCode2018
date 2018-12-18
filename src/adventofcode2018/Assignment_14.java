@@ -77,7 +77,7 @@ public class Assignment_14 {
         // this method returns the new position, but in this way:
         // if the array is: 1 2 3 4, and a player standing at position 0, moving
         // 7 further, I thought thr new position would be:
-        // 2 3 4 3 2 1 2, so 2. But latee I undestood that reaching the
+        // 2 3 4 3 2 1 2, so 2. But later I undestood that reaching the
         // end of the array, the player jumps back to the beginning.... much easier
         int reken = index + delta + 2;
         int newIndex = reken % recipes.size();

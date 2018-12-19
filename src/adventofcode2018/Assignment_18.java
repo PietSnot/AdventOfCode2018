@@ -124,7 +124,7 @@ public class Assignment_18 {
         LinkedList<Map<Point, Acre>> list = new LinkedList<>();
         list.add(new HashMap<>(terrain));
         
-        for (int i = 1; i <= 1_000; i++) {
+        for (int i = 1; i <= 3_000; i++) {
 //            System.out.println("busy with generation: " + i);
             var newGeneration = list.getLast().entrySet().stream()
                 .map(e -> new Duo(e.getKey(), Acre.of(e.getKey(), e.getValue().next().acretype)))
@@ -134,7 +134,7 @@ public class Assignment_18 {
             list.addLast(newGeneration);
             long nrOfTrees = newGeneration.values().stream().filter(a -> a.acretype == AcreType.TREES).count();
             long nrOfLumber =newGeneration.values().stream().filter(a -> a.acretype == AcreType.LUMBERYARD).count();
-            if (i % 10 == 0) System.out.format("generation: %d, Trees: %d, Lum: %d, resval: %d%n", i, nrOfTrees, nrOfLumber, nrOfTrees * nrOfLumber);
+            if (i % 100 == 0) System.out.format("generation: %d, Trees: %d, Lum: %d, resval: %d%n", i, nrOfTrees, nrOfLumber, nrOfTrees * nrOfLumber);
             
 //            print(newGeneration);
                 
